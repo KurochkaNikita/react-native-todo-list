@@ -1,8 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export const Todo = ({title}) => {
-  return <View style={style.todo}><Text>{title}</Text></View>
+export const Todo = ({title, id, removeTodo}) => {
+  return (
+    <TouchableOpacity
+      onLongPress={() => removeTodo(id)}
+    >
+      <View style={style.todo}>
+        <Text>{title}</Text>
+      </View>
+    </TouchableOpacity>)
 };
 
 const style = StyleSheet.create({
@@ -10,7 +17,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 15,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#eee',
     borderRadius: 5,
     marginBottom: 15
