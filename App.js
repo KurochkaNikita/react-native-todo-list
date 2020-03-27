@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { NavBar } from "./src/components/NavBar";
-import {AddTodo} from "./src/components/AddTodo";
-import {Todo} from "./src/components/Todo";
+import {MainScreen } from "./src/screens/MainScreen";
+import {TodoScreen} from "./src/screens/TodoScreen";
 
 export default function App() {
-  const [ todo, setTodo ] = useState([]);
+  const [ todoId, setTodoId ] = useState(null);
+  const [ todos, setTodo ] = useState([]);
 
   const addTodo = (title) => {
     setTodo((prevState)=> [
-      ...todo, {
+      ...todos, {
         id: Date.now().toString(),
         title,
       }
@@ -20,19 +21,20 @@ export default function App() {
     setTodo((prev) => prev.filter(todo => todo.id !== id))
   }
 
+  let content = <MainScreen todos={todos} removeTodo={removeTodo} addTodo={addTodo} onOpen={setTodoId}/>;
+
+  if(todoId) {
+    const todo = todos.find(todo => todo.id === todoId);
+    content = <TodoScreen goBack={() => setTodoId(null)} todo={todo}/>
+  }
+
+  console.log('todoId', todoId)
+
   return (
     <View>
       <NavBar title="Todo List!"/>
       <View style={styles.container}>
-        <AddTodo onSubmit={addTodo}/>
-        <FlatList
-          keyExtractor={(item) => item.id.toString()}
-          data={todo}
-          contentContainerStyle={{paddingBottom: 200}} // fixing issue with showing last items
-          renderItem={({item: {title, id}}) => (
-            <Todo title={title} id={id} removeTodo={removeTodo}/>
-          )}
-        />
+        {content}
       </View>
     </View>
   );
