@@ -6,7 +6,7 @@ export const AddTodo = ({onSubmit}) => {
   const [title, setTitle ] = useState('');
 
   const pressHandler = () => {
-    if(title){
+    if(title.trim()){
       onSubmit(title);
       setTitle('')
     } else {

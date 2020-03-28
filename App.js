@@ -1,16 +1,39 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, FlatList, Alert} from 'react-native';
+import {StyleSheet, View, Alert} from 'react-native';
+import * as Font from 'expo-font'
+import { AppLoading } from 'expo'
+
 import {NavBar} from "./src/components/NavBar";
 import {MainScreen} from "./src/screens/MainScreen";
 import {TodoScreen} from "./src/screens/TodoScreen";
 
+async function loadApplication() {
+  await Font.loadAsync({
+    'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf')
+  })
+}
+
 export default function App() {
+  const [isReady, setIsReady] = useState(false)
   const [todoId, setTodoId] = useState(null);
-  const [todos, setTodo] = useState([]);
+  const [todos, setTodo] = useState([
+    { id: '1', title: 'Выучить React Native' }
+  ]);
+
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onError={console.warn}
+        onFinish={() => setIsReady(true)}
+      />
+    )
+  }
 
   const addTodo = (title) => {
     setTodo((prevState) => [
-      ...todos, {
+      ...prevState, {
         id: Date.now().toString(),
         title,
       }
@@ -47,11 +70,25 @@ export default function App() {
     }))
   };
 
-  let content = <MainScreen todos={todos} removeTodo={removeTodo} addTodo={addTodo} onOpen={setTodoId}/>;
+  let content = (
+    <MainScreen
+      todos={todos}
+      removeTodo={removeTodo}
+      addTodo={addTodo}
+      onOpen={setTodoId}
+    />
+  );
 
   if (todoId) {
     const todo = todos.find(todo => todo.id === todoId);
-    content = <TodoScreen onSave={updateTodo} onRemove={removeTodo} goBack={() => setTodoId(null)} todo={todo}/>
+    content = (
+      <TodoScreen
+        onSave={updateTodo}
+        onRemove={removeTodo}
+        goBack={() => setTodoId(null)}
+        todo={todo}
+      />
+    )
   }
 
   return (
@@ -69,7 +106,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 20
   },
-  text: {
-    fontSize: 20,
-  }
 });

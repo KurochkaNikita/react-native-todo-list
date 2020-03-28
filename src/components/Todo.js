@@ -7,13 +7,13 @@ export const Todo = ({title, id, removeTodo, onOpen}) => {
       onLongPress={() => removeTodo(id, title)}
       onPress={() => onOpen(id)}
     >
-      <View style={style.todo}>
-        <Text>{title}</Text>
+      <View style={styles.todo}>
+        <Text style={styles.title}>{title}</Text>
       </View>
     </TouchableOpacity>)
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   todo: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -22,5 +22,11 @@ const style = StyleSheet.create({
     borderColor: '#eee',
     borderRadius: 5,
     marginBottom: 15
+  },
+  title: {
+    //
+    // NEED To FIX ISSUE WITH DOWNLOAD FontFamily
+    //
+    // fontFamily: 'roboto-bold'
   }
 });

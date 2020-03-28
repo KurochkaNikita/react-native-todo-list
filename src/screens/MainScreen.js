@@ -5,16 +5,18 @@ import {Todo} from "../components/Todo";
 
 export const MainScreen = ({todos, addTodo, removeTodo, onOpen}) => {
 
-  let context = <FlatList
-    keyExtractor={(item) => item.id.toString()}
-    data={todos}
-    contentContainerStyle={{paddingBottom: 200}} // fixing issue with showing last items
-    renderItem={({item: {title, id}}) => (
-      <Todo title={title} id={id} removeTodo={removeTodo} onOpen={onOpen}/>
-    )}
-  />;
+  let context = (
+    <FlatList
+      keyExtractor={(item) => item.id.toString()}
+      data={todos}
+      contentContainerStyle={{paddingBottom: 200}} // fixing issue with showing last items
+      renderItem={({item: {title, id}}) => (
+        <Todo title={title} id={id} removeTodo={removeTodo} onOpen={onOpen}/>
+      )}
+    />
+  );
 
-  if (!context.length) {
+  if (!todos.length) {
     context = (
       <View style={styles.imageWrapper}>
         <Image
