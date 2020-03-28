@@ -21,16 +21,20 @@ export const EditModal = ({isVisible, onVisible, value, onSave}) => {
     >
       <View style={styles.wrap}>
         <TextInput
+          value={title}
+          onChangeText={setTitle}
           style={styles.input}
-          placeholder={'test'}
+          placeholder='Введите название'
           autoCapitalize='none'
           autoCorrect={false}
           maxLength={64}
-          value={title}
-          onChangeText={setTitle}
         />
         <View style={styles.buttons}>
-          <Button title="Cancel" onPress={() => onVisible(false)} color={THEME.DANGER_COLOR}/>
+          <Button
+            title="Cancel"
+            onPress={() => onVisible(false)}
+            color={THEME.DANGER_COLOR}
+          />
           <Button title="Save" onPress={saveHandler}/>
         </View>
       </View>

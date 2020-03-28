@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, Button} from "react-native";
+import {StyleSheet, View, Button} from "react-native";
 import {THEME} from "../theme";
 import {AppCard} from "../ui/AppCard";
 import {EditModal} from "../components/EditModal";
+import {AppTextBold} from "../ui/AppTextBold";
 
 export const TodoScreen = ({todo: {id, title}, goBack, onRemove, onSave}) => {
   const [ isModal, setIsModel ] = useState(false);
@@ -22,7 +23,7 @@ export const TodoScreen = ({todo: {id, title}, goBack, onRemove, onSave}) => {
       />
 
       <AppCard style={styles.card}>
-        <Text style={styles.title}>{title}</Text>
+        <AppTextBold style={styles.title}>{title}</AppTextBold>
         <Button
           title={'Edit'}
           onPress={() => setIsModel(true)}

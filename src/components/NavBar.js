@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { THEME } from "./../theme";
+import {AppTextBold} from "../ui/AppTextBold";
 
 export const NavBar = ({title}) => {
   return (
     <View style={styles.navBar}>
-      <Text style={styles.text}>{title}</Text>
+      <AppTextBold style={styles.text}>{title}</AppTextBold>
     </View>
   )
 };

@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import {AppText} from "../ui/AppText";
 
 export const Todo = ({title, id, removeTodo, onOpen}) => {
   return (
@@ -8,7 +9,7 @@ export const Todo = ({title, id, removeTodo, onOpen}) => {
       onPress={() => onOpen(id)}
     >
       <View style={styles.todo}>
-        <Text style={styles.title}>{title}</Text>
+        <AppText>{title}</AppText>
       </View>
     </TouchableOpacity>)
 };
@@ -23,10 +24,4 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 15
   },
-  title: {
-    //
-    // NEED To FIX ISSUE WITH DOWNLOAD FontFamily
-    //
-    // fontFamily: 'roboto-bold'
-  }
 });

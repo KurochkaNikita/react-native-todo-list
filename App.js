@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Alert} from 'react-native';
+// Dont add expo-font to package.json
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
@@ -15,11 +16,9 @@ async function loadApplication() {
 }
 
 export default function App() {
-  const [isReady, setIsReady] = useState(false)
+  const [isReady, setIsReady] = useState(false);
   const [todoId, setTodoId] = useState(null);
-  const [todos, setTodo] = useState([
-    { id: '1', title: 'Выучить React Native' }
-  ]);
+  const [todos, setTodo] = useState([]);
 
   if (!isReady) {
     return (
