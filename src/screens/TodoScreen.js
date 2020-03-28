@@ -3,13 +3,13 @@ import {StyleSheet, View, Text, Button} from "react-native";
 import {THEME} from "../theme";
 import {AppCard} from "../ui/AppCard";
 
-export const TodoScreen = ({todo, goBack}) => {
+export const TodoScreen = ({todo: {id, title}, goBack, onRemove}) => {
 
   return (
     <View>
 
       <AppCard style={styles.card}>
-        <Text style={styles.title}>{todo.title}</Text>
+        <Text style={styles.title}>{title}</Text>
         <Button
           title={'Edit'}
           // onPress={goBack}
@@ -29,7 +29,7 @@ export const TodoScreen = ({todo, goBack}) => {
           <Button
             title={'Delete'}
             color={THEME.DANGER_COLOR}
-            onPress={() => console.log('remove')}
+            onPress={() => onRemove(id, title)}
           />
         </View>
       </View>
