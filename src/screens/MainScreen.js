@@ -1,12 +1,27 @@
-import React from 'react';
-import {StyleSheet, View, Text, FlatList, Image} from "react-native";
+import React, { useState, useEffect } from 'react';
+import {StyleSheet, View, FlatList, Image, Dimensions} from "react-native";
 import {AddTodo} from "../components/AddTodo";
 import {Todo} from "../components/Todo";
+import {THEME} from "../theme";
 
 export const MainScreen = ({todos, addTodo, removeTodo, onOpen}) => {
 
+  const [ deviceWidth, setDeviceWidth ] = useState(Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2);
+
+  useEffect(() => {
+    const update = () => {
+      setDeviceWidth(Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2)
+    };
+    Dimensions.addEventListener('change', update);
+
+    return () => {
+      Dimensions.removeEventListener('change', update);
+    }
+  });
+
   let context = (
     <FlatList
+      style={{ width: deviceWidth }}
       keyExtractor={(item) => item.id.toString()}
       data={todos}
       contentContainerStyle={{paddingBottom: 200}} // fixing issue with showing last items
