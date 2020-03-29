@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
+import { View, StyleSheet, TextInput, Keyboard, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 import {THEME} from "../theme";
 
@@ -9,7 +9,8 @@ export const AddTodo = ({onSubmit}) => {
   const pressHandler = () => {
     if(title.trim()){
       onSubmit(title);
-      setTitle('')
+      setTitle('');
+      Keyboard.dismiss();
     } else {
       Alert.alert('Поля не должно быть пустым!')
     }
