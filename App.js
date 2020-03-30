@@ -7,6 +7,7 @@ import { AppLoading } from 'expo'
 import {NavBar} from "./src/components/NavBar";
 import {MainScreen} from "./src/screens/MainScreen";
 import {TodoScreen} from "./src/screens/TodoScreen";
+import {THEME} from "./src/theme";
 
 async function loadApplication() {
   await Font.loadAsync({
@@ -18,7 +19,7 @@ async function loadApplication() {
 export default function App() {
   const [isReady, setIsReady] = useState(false);
   const [todoId, setTodoId] = useState(null);
-  const [todos, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);
 
   if (!isReady) {
     return (
@@ -31,7 +32,7 @@ export default function App() {
   }
 
   const addTodo = (title) => {
-    setTodo((prevState) => [
+    setTodos((prevState) => [
       ...prevState, {
         id: Date.now().toString(),
         title,
@@ -102,7 +103,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 30,
+    paddingHorizontal: THEME.PADDING_HORIZONTAL,
     paddingVertical: 20
   },
 });
