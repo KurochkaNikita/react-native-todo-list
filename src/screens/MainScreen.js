@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, View, FlatList, Image, Dimensions} from "react-native";
 import {AddTodo} from "../components/AddTodo";
 import {Todo} from "../components/Todo";
 import {THEME} from "../theme";
+import {TodoContext} from './../context/todo/todoContext'
+import {ScreenContext} from './../context/screens/screenContext'
 
-export const MainScreen = ({todos, addTodo, removeTodo, onOpen}) => {
+export const MainScreen = ({onOpen}) => {
+  const {todos} = useContext(TodoContext);
 
-  const [ deviceWidth, setDeviceWidth ] = useState(Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2);
+  const [deviceWidth, setDeviceWidth] = useState(Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2);
 
   useEffect(() => {
     const update = () => {
@@ -21,12 +24,12 @@ export const MainScreen = ({todos, addTodo, removeTodo, onOpen}) => {
 
   let context = (
     <FlatList
-      style={{ width: deviceWidth }}
+      style={{width: deviceWidth}}
       keyExtractor={(item) => item.id.toString()}
       data={todos}
       contentContainerStyle={{paddingBottom: 200}} // fixing issue with showing last items
       renderItem={({item: {title, id}}) => (
-        <Todo title={title} id={id} removeTodo={removeTodo} onOpen={onOpen}/>
+        <Todo title={title} id={id}/>
       )}
     />
   );
@@ -44,7 +47,7 @@ export const MainScreen = ({todos, addTodo, removeTodo, onOpen}) => {
 
   return (
     <View>
-      <AddTodo onSubmit={addTodo}/>
+      <AddTodo/>
       {context}
     </View>
   )

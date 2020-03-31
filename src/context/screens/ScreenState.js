@@ -6,16 +6,16 @@ import {CHANGE_SCREEN} from "../type";
 export const ScreenState = ({children}) => {
   const [ state, dispatch] = useReducer(screenReducer, null);
 
-  const changeScreen = () => dispatch({type: CHANGE_SCREEN, payload: id});
+  const changeScreen = (id) => dispatch({type: CHANGE_SCREEN, payload: id});
 
   return (
-    <ScreenContext.Provide
+    <ScreenContext.Provider
       value={{
         todoId: state,
         changeScreen
       }}
     >
       {children}
-    </ScreenContext.Provide>
+    </ScreenContext.Provider>
   )
 }
