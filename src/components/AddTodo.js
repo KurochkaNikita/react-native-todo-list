@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { View, StyleSheet, TextInput, Keyboard, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 import {THEME} from "../theme";
+import {TodoContext} from "../context/todo/todoContext";
 
-export const AddTodo = ({onSubmit}) => {
+export const AddTodo = () => {
+  const { addTodo: onSubmit } = useContext(TodoContext);
   const [title, setTitle ] = useState('');
 
   const pressHandler = () => {
