@@ -1,15 +1,22 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useCallback} from 'react';
 import {StyleSheet, View, FlatList, Image, Dimensions} from "react-native";
 import {AddTodo} from "../components/AddTodo";
 import {Todo} from "../components/Todo";
 import {THEME} from "../theme";
 import {TodoContext} from './../context/todo/todoContext'
-import {ScreenContext} from './../context/screens/screenContext'
+import {AppLoading} from "./../ui/AppLoading";
+import {AppError} from "./../ui/AppError";
 
-export const MainScreen = ({onOpen}) => {
-  const {todos} = useContext(TodoContext);
+export const MainScreen = () => {
+  const {todos, fetchTodos, isLoading, error } = useContext(TodoContext);
 
   const [deviceWidth, setDeviceWidth] = useState(Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2);
+
+  const loadTodos = useCallback(async () => await fetchTodos(), [fetchTodos]);
+
+  useEffect(() => {
+    loadTodos()
+  }, []);
 
   useEffect(() => {
     const update = () => {
@@ -21,6 +28,14 @@ export const MainScreen = ({onOpen}) => {
       Dimensions.removeEventListener('change', update);
     }
   });
+
+  if(error) {
+    return <AppError message={error} refresh={fetchTodos}/>
+  }
+
+  if(isLoading) {
+    return <AppLoading />
+  }
 
   let context = (
     <FlatList
@@ -55,6 +70,7 @@ export const MainScreen = ({onOpen}) => {
 
 const styles = StyleSheet.create({
   imageWrapper: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,

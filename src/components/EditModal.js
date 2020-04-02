@@ -14,8 +14,8 @@ export const EditModal = ({isVisible, onVisible, value, onSave}) => {
     }
   };
 
-  const cancelHandler = () => {
-    setTitle(value);
+  const cancelHandler = async () => {
+    await setTitle(value);
     onVisible(false);
   };
 
