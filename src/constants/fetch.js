@@ -1,0 +1,1 @@
+export const BASIC_URL = 'https://react-native-todo-list-9b0e3.firebaseio.com/';
