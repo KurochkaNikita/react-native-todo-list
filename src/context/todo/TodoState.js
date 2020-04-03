@@ -14,6 +14,7 @@ import {
 } from "../type";
 import {ScreenContext} from "../screens/screenContext";
 import {BASIC_URL} from "../../constants/fetch";
+import {Http} from "../../http";
 
 export const TodoState = ({children}) => {
   const initialState = {
@@ -26,13 +27,13 @@ export const TodoState = ({children}) => {
   const [state, dispatch] = useReducer(todoReducer, initialState);
 
   const addTodo = async (title) => {
-    const response = await fetch(`${BASIC_URL}todos.json`, {
-      method: 'POST',
-      headers: {'Context-Type': 'application/json'},
-      body: JSON.stringify({title})
-    });
-    const {name: id} = await response.json;
-    dispatch({type: ADD_TODO, title, id});
+    clearError()
+    try {
+      const {name: id} = await Http.post(`${BASIC_URL}todos.json`, {title})
+      dispatch({type: ADD_TODO, title, id});
+    } catch (err) {
+      showError(err)
+    }
   };
 
   const removeTodo = (id) => {
@@ -50,14 +51,7 @@ export const TodoState = ({children}) => {
           style: 'destructive',
           onPress: async () => {
             changeScreen(null);
-            await fetch(
-              `${BASIC_URL}todos/${id}.json`,
-              {
-                method: 'DELETE',
-                headers: {'Content-Type': 'application/json'},
-
-              }
-            );
+            await Http.delete(`${BASIC_URL}todos/${id}.json`)
             dispatch({type: REMOVE_TODO, id: todo.id})
           }
         },
@@ -70,18 +64,12 @@ export const TodoState = ({children}) => {
     showLoader();
     clearError();
     try {
-      const response = await fetch(
-        `${BASIC_URL}todos.json`,
-        {
-          method: 'GET',
-          headers: {'Content-Type': 'application/json'}
-        }
-      );
-      const data = await response.json();
+      const data = await Http.get(`${BASIC_URL}todos.json`)
+      console.log()
       const todos = Object.keys(data).map(key => ({...data[key], id: key}));
       dispatch({type: FETCH_TODOS, todos});
-    } catch (error) {
-      showError('Please try again')
+    } catch (err) {
+      showError(err)
     } finally {
       hideLoader();
     }
@@ -90,17 +78,10 @@ export const TodoState = ({children}) => {
   const updateTodo = async (id, title) => {
     clearError();
     try {
-      const response = await fetch(
-        `${BASIC_URL}todos/${id}.json`,
-        {
-          method: 'PATCH',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({title})
-        }
-      );
+      await Http.patch(`${BASIC_URL}todos/${id}.json`, {title})
       dispatch({type: UPDATE_TODO, id, title})
-    } catch (e) {
-      showError('Please try again')
+    } catch (err) {
+      showError(err)
     }
   };
 
