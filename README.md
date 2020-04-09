@@ -2,6 +2,8 @@
 
 It is me first project on React Native
 
+### [EXPO LINK](https://exp.host/@freenikita/react-native-todo-list)
+
 ## About project 
 
 Functional: 

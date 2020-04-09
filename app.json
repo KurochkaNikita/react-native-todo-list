@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "React Native todo list",
-    "slug": "rn-todo-list",
+    "name": "Todo list",
+    "slug": "react-native-todo-list",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -14,7 +14,7 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -24,7 +24,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nikitests.todo-list",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.nikitests.todo_list",
+      "versionCode": 1,
     }
   }
 }
