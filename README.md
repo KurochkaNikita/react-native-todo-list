@@ -3,7 +3,7 @@
 # react-native-todo-list
 
 ```diff
-+ It is me first project on React Native*
++ First project is on React Native*
 ```
 
 ## Functional: 

@@ -10,16 +10,16 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
-    "expo": "~36.0.0",
-    "react": "~16.9.0",
-    "react-dom": "~16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-web": "~0.11.7"
+    "expo": "~40.0.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "babel-preset-expo": "~8.0.0",
-    "@types/react-native": "^0.61.23"
+    "@babel/core": "~7.9.0",
+    "@types/react-native": "^0.63.52",
+    "babel-preset-expo": "~8.0.0"
   },
   "private": true
 }

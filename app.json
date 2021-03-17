@@ -3,7 +3,7 @@
     "name": "React Native todo list",
     "slug": "rn-todo-list",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
+    "sdkVersion": "40.0.0",
     "platforms": [
       "ios",
       "android",
