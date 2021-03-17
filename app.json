@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "React Native todo list",
-    "slug": "rn-todo-list",
+    "name": "Todo list",
+    "slug": "react-native-todo-list",
     "privacy": "public",
     "sdkVersion": "40.0.0",
     "platforms": [

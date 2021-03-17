@@ -40,7 +40,7 @@ export const MainScreen = () => {
   let context = (
     <FlatList
       style={{width: deviceWidth}}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item) => item.id}
       data={todos}
       contentContainerStyle={{paddingBottom: 200}} // fixing issue with showing last items
       renderItem={({item: {title, id}}) => (
